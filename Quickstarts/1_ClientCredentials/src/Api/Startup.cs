@@ -36,6 +36,7 @@ namespace Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseMvc();
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
                 Authority = "http://localhost:5000",
@@ -44,7 +45,6 @@ namespace Api
                 ApiName = "api1"
             });
 
-            app.UseMvc();
         }
     }
 }
