@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
 namespace Api
 {
     public class Startup
@@ -26,9 +25,8 @@ namespace Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
+            services.AddMvc()
+                ;
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
