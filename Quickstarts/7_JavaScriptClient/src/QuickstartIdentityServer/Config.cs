@@ -25,7 +25,8 @@ namespace QuickstartIdentityServer
         {
             return new List<ApiResource>
             {
-                new ApiResource("api1", "My API")
+                new ApiResource("api1", "My API"),
+                new ApiResource("api_identity","API for Identity")
             };
         }
 
@@ -100,7 +101,7 @@ namespace QuickstartIdentityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "api1"
+                        "api1","api_identity"
                     },
                 }
             };

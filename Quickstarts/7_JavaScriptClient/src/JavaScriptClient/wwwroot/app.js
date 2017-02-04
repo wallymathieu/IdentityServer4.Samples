@@ -23,7 +23,7 @@ var config = {
     client_id: "js",
     redirect_uri: "http://localhost:5003/callback.html",
     response_type: "id_token token",
-    scope:"openid profile api1",
+    scope:"openid profile api1 api_identity",
     post_logout_redirect_uri : "http://localhost:5003/index.html",
 };
 var mgr = new Oidc.UserManager(config);
@@ -43,7 +43,7 @@ function login() {
 
 function api() {
     mgr.getUser().then(function (user) {
-        var url = "http://localhost:5001/identity";
+        var url = "http://localhost:5000/api/identity/";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
