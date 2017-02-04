@@ -14,6 +14,19 @@ function log() {
     });
 }
 
+function error() {
+    document.getElementById('errors').innerText = '';
+
+    Array.prototype.forEach.call(arguments, function (msg) {
+        if (msg instanceof Error) {
+            msg = "Error: " + msg.message;
+        }
+        else if (typeof msg !== 'string') {
+            msg = JSON.stringify(msg, null, 2);
+        }
+        document.getElementById('errors').innerHTML += msg + '\r\n';
+    });
+}
 document.getElementById("login").addEventListener("click", login, false);
 document.getElementById("api").addEventListener("click", api, false);
 document.getElementById("logout").addEventListener("click", logout, false);
@@ -49,6 +62,21 @@ function api() {
         xhr.open("GET", url);
         xhr.onload = function () {
             log(xhr.status, JSON.parse(xhr.responseText));
+        }
+        xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
+        xhr.send();
+    });
+
+    mgr.getUser().then(function (user) {
+        var url = "http://localhost:5000/other/";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.onload = function () {
+            log(xhr.status, JSON.parse(xhr.responseText));
+        }
+        xhr.onerror = function(){
+            error(xhr.status, xhr.responseText);
         }
         xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
         xhr.send();
