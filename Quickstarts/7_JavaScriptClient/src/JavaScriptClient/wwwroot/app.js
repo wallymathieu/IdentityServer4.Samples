@@ -56,6 +56,18 @@ function login() {
 
 function api() {
     mgr.getUser().then(function (user) {
+        var url = "http://localhost:5001/identity";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.onload = function () {
+            log(xhr.status, JSON.parse(xhr.responseText));
+        }
+        xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
+        xhr.send();
+    });
+
+    mgr.getUser().then(function (user) {
         var url = "http://localhost:5000/api/identity/";
 
         var xhr = new XMLHttpRequest();

@@ -8,9 +8,7 @@ namespace QuickstartIdentityServer
     {
         [HttpGet("")]
         public IActionResult Get(){
-            return this.Ok(new {
-                claims=this.User.Claims.Select(c=>$"{c.Type}:{c.Value}")
-            });
+            return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
         }
     }
 }
